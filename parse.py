@@ -1,6 +1,8 @@
 import csv
+import sys
 
-DATA_FILE = 'data/sample_sfpd_incident_all.csv'
+SAMPLE_DATA_FILE = 'data/sample_sfpd_incident_all.csv'
+
 
 def parse(filename, delimiter):
     """Parse csv data and return output
@@ -12,12 +14,19 @@ def parse(filename, delimiter):
     return csv_data
 
 
-def main():
+def main(filename=None):
     """
     """
-    parse_data = parse(DATA_FILE, ',')
+    if not filename:
+        filename = SAMPLE_DATA_FILE
+    parse_data = parse(filename, ',')
 
     print(parse_data)
 
 if __name__=="__main__":
-    main()
+    if len(sys.argv) > 1:
+        for each in sys.argv[1:]:
+            main(each)
+    else:
+        main()
+
